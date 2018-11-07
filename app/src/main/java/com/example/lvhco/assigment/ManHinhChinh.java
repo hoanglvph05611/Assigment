@@ -1,6 +1,7 @@
 package com.example.lvhco.assigment;
 
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -48,13 +49,13 @@ public class ManHinhChinh extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 //        //ToolBar
-//        toolbar=findViewById(R.id.toolBar1);
-//        setSupportActionBar(toolbar);
-//        Drawable drawable1 = getResources().getDrawable(R.drawable.ic_menu);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeAsUpIndicator(drawable1);
-//        getSupportActionBar().setDisplayShowTitleEnabled(true);
-//        toolbar.setTitle("Khoan Thu");
+        toolbar=findViewById(R.id.toolBar1);
+        setSupportActionBar(toolbar);
+        Drawable drawable1 = getResources().getDrawable(R.drawable.ic_menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(drawable1);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        toolbar.setTitle("Khoan Thu");
 //    }
 
 
@@ -72,44 +73,38 @@ public class ManHinhChinh extends AppCompatActivity implements NavigationView.On
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_container, new KhoanThuFragment()).commit();
     }
-   private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-           new BottomNavigationView.OnNavigationItemSelectedListener() {
-               @Override
-               public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                   Fragment selectedFragment = null;
-                   switch (menuItem.getItemId()){
-                       case R.id.navigation_khoanthu:
-                           selectedFragment = new KhoanThuFragment();
-                           break;
-                           case R.id.navigation_khoanchi:
-                           selectedFragment = new KhoanChiFragment();
-                           break;
-                           case R.id.navigation_thongke:
-                           selectedFragment = new ThongKeFragment();
-                           break;
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    Fragment selectedFragment = null;
+                    switch (menuItem.getItemId()){
+                        case R.id.navigation_khoanthu:
+                            selectedFragment = new KhoanThuFragment();
+                            break;
+                        case R.id.navigation_khoanchi:
+                            selectedFragment = new KhoanChiFragment();
+                            break;
+                        case R.id.navigation_thongke:
+                            selectedFragment = new ThongKeFragment();
+                            break;
 
-                   }
-                   getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_container,selectedFragment).commit();
-                   return true;
-               }
-           };
+                    }
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_container,selectedFragment).commit();
+                    return true;
+                }
+            };
 
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)){
-                drawerLayout.closeDrawer(GravityCompat.START);
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-        super.onBackPressed();
+            super.onBackPressed();
         }
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (toggle.onOptionsItemSelected(item)){
 
-        }
-        return super.onOptionsItemSelected(item);
-    }
-//    @Override
+    //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
 //        switch (item.getItemId()){
 //            case android.R.id.home:
@@ -125,36 +120,36 @@ public class ManHinhChinh extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_container,
                         new KhoanThuFragment()).commit();
                 break;
-                case R.id.itemKhoanChi:
+            case R.id.itemKhoanChi:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_container,
                         new KhoanChiFragment()).commit();
                 break;
-                case R.id.itemThongKe:
+            case R.id.itemThongKe:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_container,
                         new ThongKeFragment()).commit();
                 break;
-                case R.id.itemGioiThieu:
+            case R.id.itemGioiThieu:
 //                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_container,
 //                        new KhoanThuFragment()).commit();
-                    Toast.makeText(this, "giới thiệu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "giới thiệu", Toast.LENGTH_SHORT).show();
                 break;
-                case R.id.itemThoat:
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Bạn có muốn thoát không");
-                    builder.setIcon(R.drawable.iconthoat);
-                    builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+            case R.id.itemThoat:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Bạn có muốn thoát không");
+                builder.setIcon(R.drawable.iconthoat);
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                        }
-                    });
-                    builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-                    });
-                    builder.show();
+                    }
+                });
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                builder.show();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -165,6 +160,17 @@ public class ManHinhChinh extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_con,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.KhoaUngDung:
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
         return true;
     }
 }
